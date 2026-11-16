@@ -22,6 +22,9 @@ However, there does not seem to have an option to disable this.
 
 ## Running
 
+This package was once pulished on [PyPi](https://pypi.org/project/steam-ungarbage) and I felt this was too much for a script, so
+newer releases will be put inside this repo.
+
 Run:
 
 ```bash

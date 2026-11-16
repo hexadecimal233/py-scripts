@@ -15,14 +15,20 @@ Build or publish all tools at once:
 
 ```bash
 uv build --all-packages
-uv publish dist/*
+# uv publish dist/*
 ```
 
 Installing an unreleased tool straight from this repo:
 
 ```bash
+# via uv
 uv tool install "git+https://github.com/hexadecimal233/py-scripts#subdirectory=packages/steam-ungarbage"
+
+# via mise
+mise use -g pypi:git+https://github.com/hexadecimal233/py-scripts#subdirectory=packages/adb-export-tabs
 ```
+
+If mise does not seem to work, try add `MISE_USE_VERSIONS_HOST=0` to the command to bypass the cache limit.
 
 ## Adding a tool
 
