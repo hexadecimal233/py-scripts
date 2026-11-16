@@ -1,0 +1,18 @@
+[project]
+name = "steam-ungarbage"
+version = "0.0.2"
+description = "A utility to clean up Steam created link files."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = ["colorama"]
+
+[project.urls]
+Repository = "https://github.com/hexadecimal233/py-scripts"
+
+[project.scripts]
+steam-ungarbage = "steam_ungarbage:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,35 +1,33 @@
-# steam-ungarbage
+# py-scripts
 
-This is a utility to clean steam created URL links and uninstall info on Windows, Linux and macOS.
+Some tools I use. Scripts located under [packages](packages/).
 
-This tool **does not** prevent Steam from creating those links.
+## Development
 
-Currently tested on Windows and macOS.
-
-## Why I am making this
-
-Steam creates shortcut URLs (and uninstall info on Windows) that launches Steam upon clicking.
-
-For me it offers no convenience and may cause more misclicks in daily usage. (steam itself is a launcher though)
-
-However, there does not seem to have an option to disable this.
-
-## What are being cleaned
-
-- **Windows**: Steam desktop & Start Menu `.url` shortcuts, Epic desktop `.url` shortcuts (`com.epicgames.launcher://`, Epic only writes to the desktop), and Steam `Steam App <appid>` uninstall entries in the registry
-- **Linux**: `.desktop` files and icons created in the home data folders, and Desktop icons
-- **macOS**: Pseudo `.app` files created under `~/Applications`
-
-## Running
-
-Run:
+Install every workspace member into `.venv` (a bare `uv sync` only installs the virtual root, which has no dependencies):
 
 ```bash
-uvx steam-ungarbage # (or uv tool run steam-ungarbage)
-
-# For newer windows run:
-sudo uvx steam-ungarbage
-
-# Run locally
+uv sync --all-packages
 uv run steam-ungarbage
 ```
+
+Build or publish all tools at once:
+
+```bash
+uv build --all-packages
+uv publish dist/*
+```
+
+Installing an unreleased tool straight from this repo:
+
+```bash
+uv tool install "git+https://github.com/hexadecimal233/py-scripts#subdirectory=packages/steam-ungarbage"
+```
+
+## Adding a tool
+
+1. Create `packages/<tool>/pyproject.toml` with its own `[project]`, `[project.scripts]` and `[build-system]`, plus `packages/<tool>/<module>/`.
+2. `uv sync --all-packages` to install it into the shared `.venv`.
+3. Document it in the table above.
+
+Each package keeps its own version and PyPI name. Cross-tool code goes into its own `packages/<lib>/` member and is referenced with `[tool.uv.sources] <lib> = { workspace = true }`.
